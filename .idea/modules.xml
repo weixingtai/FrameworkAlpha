@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/FrameworkAlpha.iml" filepath="$PROJECT_DIR$/FrameworkAlpha.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module_alpha/module_alpha.iml" filepath="$PROJECT_DIR$/module_alpha/module_alpha.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module_common/module_common.iml" filepath="$PROJECT_DIR$/module_common/module_common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module_main/module_main.iml" filepath="$PROJECT_DIR$/module_main/module_main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module_mine/module_mine.iml" filepath="$PROJECT_DIR$/module_mine/module_mine.iml" />
+    </modules>
+  </component>
+</project>
