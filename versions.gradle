@@ -15,6 +15,9 @@ versions.glide = "3.8.0"
 versions.rxjava2 = "2.1.7"
 versions.rx_android = "2.0.1"
 versions.retrofit = "2.3.0"
+versions.retrofit_gson = "2.3.0"
+versions.retrofit_fastjson = "2.0.2"
+versions.rxandroid = "1.2.1"
 versions.event_bus = "3.1.1"
 versions.photo_view = "2.0.0"
 versions.persistent_cookie = "v1.0.1"
@@ -30,11 +33,15 @@ versions.litepal = "1.6.1"
 versions.toasty = "1.1.3"
 versions.logger = "1.15"
 versions.material_dialog = "0.9.6.0"
+versions.fastjson = "1.2.10"
 //butter knife与as3.0冲突，版本降至8.4
 versions.butterknife = "8.4.0"
 //Arouter
 versions.arouter_compiler = "1.1.4"
 versions.arouter_api = "1.3.1"
+//ok http
+versions.okhttp = "3.11.0"
+versions.okhttp_logging = "3.6.0"
 
 
 def deps = [:]
@@ -55,8 +62,10 @@ deps.support = support
 
 def retrofit = [:]
 retrofit.runtime = "com.squareup.retrofit2:retrofit:$versions.retrofit"
-retrofit.adapter = "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofi"
-retrofit.gson = "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+retrofit.adapter = "com.squareup.retrofit2:adapter-rxjava:$versions.retrofit"
+retrofit.gson = "com.squareup.retrofit2:converter-gson:$versions.retrofit_gson"
+retrofit.fastjson = "org.ligboy.retrofit2:converter-fastjson:$versions.retrofit_fastjson"
+retrofit.rxandroid = "io.reactivex:rxandroid:$versions.rxandroid"
 deps.retrofit = retrofit
 
 
@@ -75,6 +84,10 @@ kotlin.test = "org.jetbrains.kotlin:kotlin-test-junit:$versions.kotlin"
 kotlin.plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
 deps.kotlin = kotlin
 
+def okhttp = [:]
+okhttp.okhttp3 = "com.squareup.okhttp3:okhttp:$versions.okhttp"
+okhttp.logging = "com.squareup.okhttp3:logging-interceptor:$versions.okhttp_logging"
+deps.okhttp = okhttp
 
 //view
 deps.constraint_layout = "com.android.support.constraint:constraint-layout:$versions.constraint_layout"
@@ -103,7 +116,7 @@ deps.toasty =  "com.github.GrenderG:Toasty:$versions.toasty"
 deps.logger = "com.orhanobut:logger:$versions.logger"
 deps.arouter_api = "com.alibaba:arouter-api:$versions.arouter_api"
 deps.arouter_compiler = "com.alibaba:arouter-compiler:$versions.arouter_compiler"
-
+deps.fastjson = "com.alibaba:fastjson:$versions.fastjson"
 
 ext.deps = deps
 

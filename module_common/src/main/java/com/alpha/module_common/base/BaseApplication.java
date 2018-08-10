@@ -1,6 +1,10 @@
 package com.alpha.module_common.base;
 
 import android.app.Application;
+import android.text.TextUtils;
+
+import com.alpha.module_common.utils.CommonUtils;
+import com.alpha.module_common.utils.NLog;
 
 /**
  * 要想使用BaseApplication，必须在组件中实现自己的Application，并且继承BaseApplication；
@@ -9,9 +13,22 @@ import android.app.Application;
  * 组件中获取Context的方法必须为:Utils.getContext()，不允许其他写法；
  */
 public class BaseApplication extends Application {
-
+    private final String TAG = BaseApplication.class.getSimpleName();
     @Override
     public void onCreate() {
         super.onCreate();
+        init();
+    }
+    /**
+     * 初始化
+     */
+    private void init() {
+        //初始化debug模式
+        String flag = CommonUtils.getProperty(getApplicationContext(), "debug");
+        if (!TextUtils.isEmpty(flag)) {
+            Boolean isDebug = Boolean.parseBoolean(flag);
+            NLog.setDebug(isDebug);
+            NLog.e(TAG, "isDebug: " + isDebug);
+        }
     }
 }

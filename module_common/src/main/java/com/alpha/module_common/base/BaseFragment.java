@@ -1,17 +1,11 @@
 package com.alpha.module_common.base;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.ViewFlipper;
 
 import com.alpha.module_common.R;
 import com.alpha.module_common.async.AsyncTaskManager;
@@ -20,31 +14,45 @@ import com.alpha.module_common.async.IOnDataListener;
 import com.alpha.module_common.manager.ActivityPageManager;
 import com.alpha.module_common.utils.NToast;
 
-public class BaseActivity extends FragmentActivity implements IOnDataListener {
+public abstract class BaseFragment extends Fragment implements IOnDataListener {
 
     protected Context mContext;
+    private View mContentView = null;
     private AsyncTaskManager mAsyncTaskManager;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mContext = this;
+        mContext = getActivity();
         //初始化异步框架
         mAsyncTaskManager = AsyncTaskManager.getInstance(mContext.getApplicationContext());
-        //Activity管理
-        ActivityPageManager.getInstance().addActivity(this);
     }
 
     @Override
-    protected void onDestroy() {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mContentView = onCreateFragmentView(inflater, container, savedInstanceState);
+        return mContentView;
+    }
+
+    @Override
+    public void onDestroy() {
         super.onDestroy();
-        ActivityPageManager.getInstance().removeActivity(this);
+        ActivityPageManager.unbindReferences(mContentView);
+        mContentView = null;
         mContext = null;
     }
 
     /**
+     * 创建view方法，子类必须重写
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
+    public abstract View onCreateFragmentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
+
+    /**
      * 发送请求（需要检查网络）
-     *
      * @param requestCode 请求码
      */
     public void request(int requestCode){
@@ -53,7 +61,6 @@ public class BaseActivity extends FragmentActivity implements IOnDataListener {
 
     /**
      * 发送请求
-     *
      * @param requestCode 请求码
      * @param isCheckNetwork 是否需检查网络，true检查，false不检查，主要是用于有时候网络请求从缓存里面取的
      */
@@ -64,16 +71,19 @@ public class BaseActivity extends FragmentActivity implements IOnDataListener {
 
     @Override
     public Object doInBackground(int requestCode) throws HttpException {
+        //TODO 处理异步方法
         return null;
     }
 
     @Override
     public boolean onIntercept(int requestCode, Object result) {
+        //TODO 返回true表示打断，false表示继续执行onSuccess方法
         return false;
     }
 
     @Override
     public void onSuccess(int requestCode, Object result) {
+        //TODO 处理成功的逻辑
     }
 
     @Override
@@ -95,10 +105,4 @@ public class BaseActivity extends FragmentActivity implements IOnDataListener {
                 break;
         }
     }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
 }

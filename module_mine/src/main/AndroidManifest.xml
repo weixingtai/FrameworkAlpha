@@ -3,7 +3,7 @@
 
     <application android:theme="@style/AppTheme">
         <activity
-            android:name="MineActivity"
+            android:name=".MineActivity"
             android:screenOrientation="sensor" />
     </application>
 
