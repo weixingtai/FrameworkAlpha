@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
 
 import java.io.IOException;
@@ -36,6 +37,7 @@ public class CommonUtils {
     public static String getProperty(Context context, String key){
         try {
             Properties props = new Properties();
+            Log.d("weixingtai",""+context.getAssets().toString());
             InputStream input = context.getAssets().open("config.properties");
             if (input != null) {
                 props.load(input);

@@ -3,4 +3,7 @@
     <string name="common_network_unavailable">currently network not available.</string>
     <string name="common_network_error">network problem, please try again later.</string>
     <string name="common_request_error">get data is error, please try it again.</string>
+    <string name="common_base_top_bar_menu">Menu</string>
+    <string name="common_base_top_bar_title">Title</string>
+    <string name="common_base_top_bar_login">Login</string>
 </resources>

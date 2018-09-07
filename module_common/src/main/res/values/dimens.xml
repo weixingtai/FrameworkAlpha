@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="common_base_top_bar_title">22sp</dimen>
+</resources>

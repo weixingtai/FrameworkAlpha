@@ -2,9 +2,14 @@ package com.alpha.module_common.base;
 
 import android.app.Application;
 import android.text.TextUtils;
+import android.util.Log;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.alpha.module_common.utils.ClassUtils;
 import com.alpha.module_common.utils.CommonUtils;
 import com.alpha.module_common.utils.NLog;
+
+import java.util.List;
 
 /**
  * 要想使用BaseApplication，必须在组件中实现自己的Application，并且继承BaseApplication；
@@ -14,21 +19,29 @@ import com.alpha.module_common.utils.NLog;
  */
 public class BaseApplication extends Application {
     private final String TAG = BaseApplication.class.getSimpleName();
+    public static final String ROOT_PACKAGE = "com.alpha";
+    private List<IApplicationDelegate> mAppDelegateList;
+
     @Override
     public void onCreate() {
         super.onCreate();
-        init();
+        initConfig();
+        mAppDelegateList = ClassUtils.getObjectsWithInterface(this, IApplicationDelegate.class, ROOT_PACKAGE);
+        for (IApplicationDelegate delegate : mAppDelegateList) {
+            delegate.onCreate();
+        }
     }
-    /**
-     * 初始化
-     */
-    private void init() {
+
+    private void initConfig() {
+        //初始化ARouter
+        ARouter.init(this);
+
         //初始化debug模式
         String flag = CommonUtils.getProperty(getApplicationContext(), "debug");
         if (!TextUtils.isEmpty(flag)) {
             Boolean isDebug = Boolean.parseBoolean(flag);
-            NLog.setDebug(isDebug);
-            NLog.e(TAG, "isDebug: " + isDebug);
+            NLog.setDebug(true);
+            NLog.d(TAG, "isDebug: " + isDebug);
         }
     }
 }

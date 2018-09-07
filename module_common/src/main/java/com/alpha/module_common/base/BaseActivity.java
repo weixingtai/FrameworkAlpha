@@ -20,21 +20,82 @@ import com.alpha.module_common.async.IOnDataListener;
 import com.alpha.module_common.manager.ActivityPageManager;
 import com.alpha.module_common.utils.NToast;
 
+/**
+ * 命名格式：
+ * 类：直接使用类名
+ * 布局文件：common_类的类型_名称
+ * 控件：控件类型_布局名称_控件名称
+ * 资源文件：common_类_名称
+ *
+ *
+ */
 public class BaseActivity extends FragmentActivity implements IOnDataListener {
 
     protected Context mContext;
     private AsyncTaskManager mAsyncTaskManager;
-
+    private ViewFlipper mContentView;
+    private RelativeLayout rlTopBar;
+    private Button btnTopBarLeft,btnTopBarRight;
+    private TextView tvTopBarMiddle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        super.setContentView(R.layout.common_activity_base);
         mContext = this;
+        initView();
         //初始化异步框架
         mAsyncTaskManager = AsyncTaskManager.getInstance(mContext.getApplicationContext());
         //Activity管理
         ActivityPageManager.getInstance().addActivity(this);
+
+
+    }
+    private void initView(){
+        rlTopBar = super.findViewById(R.id.common_base_rl_top_bar);
+        mContentView = super.findViewById(R.id.common_base_vf_content_container);
+        btnTopBarLeft = super.findViewById(R.id.common_base_btn_top_bar_left);
+        btnTopBarLeft = super.findViewById(R.id.common_base_btn_top_bar_right);
+        tvTopBarMiddle = super.findViewById(R.id.common_base_tv_top_bar_middle);
+
     }
 
+    public void setTopBarVisibility(int visibility){
+        rlTopBar.setVisibility(visibility);
+    }
+
+    public void setMenuVisibility(int visibility){
+        btnTopBarLeft.setVisibility(visibility);
+    }
+
+    public void setLoginBtnVisibility(int visibility){
+        btnTopBarRight.setVisibility(visibility);
+    }
+
+    public void setTitleVisibility(int visibility){
+        tvTopBarMiddle.setVisibility(visibility);
+    }
+
+    /**
+     * 设置标题
+     *
+     * @param titleId 标题文本资源
+     */
+    public void setTitle(int titleId) {
+        tvTopBarMiddle.setText(getString(titleId));
+    }
+
+
+    @Override
+    public void setContentView(View view) {
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1);
+        mContentView.addView(view, lp);
+    }
+
+    @Override
+    public void setContentView(int layoutResID) {
+        View view = LayoutInflater.from(this).inflate(layoutResID, null);
+        setContentView(view);
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();

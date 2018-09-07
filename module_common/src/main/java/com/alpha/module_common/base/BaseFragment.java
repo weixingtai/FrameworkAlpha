@@ -2,6 +2,7 @@ package com.alpha.module_common.base;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +30,7 @@ public abstract class BaseFragment extends Fragment implements IOnDataListener {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mContentView = onCreateFragmentView(inflater, container, savedInstanceState);
         return mContentView;
     }

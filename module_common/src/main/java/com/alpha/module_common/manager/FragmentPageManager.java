@@ -29,7 +29,7 @@ public class FragmentPageManager {
         if (fragmentList == null) {
             fragmentList = new ArrayList<>();
         }
-        fragmentList.add(index, fragment);
+        fragmentList.add(fragment);
     }
 
 

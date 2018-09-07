@@ -78,6 +78,8 @@ dependencies {
     implementation project(':module_common')
     if (COMBINE_MODULE.toBoolean()) {
         implementation project(':module_main')
+        implementation project(':module_home')
+        implementation project(':module_message')
         implementation project(':module_mine')
     }
 }

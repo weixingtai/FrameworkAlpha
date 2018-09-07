@@ -1,6 +1,5 @@
 package debug;
 
-
 import com.alpha.module_common.base.BaseApplication;
 
 public class MainApplication extends BaseApplication {

@@ -1,1 +1,1 @@
-include ':module_main', ':module_common', ':module_mine', ':module_alpha'
+include ':module_main', ':module_common', ':module_mine', ':module_alpha', ':module_message', ':module_home'
